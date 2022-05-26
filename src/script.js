@@ -10,7 +10,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
  * Base
  */
 // Debug
-const gui = new dat.GUI()
+// const gui = new dat.GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -31,7 +31,7 @@ const matcapTexture1 = textureLoader.load('/textures/matcaps/5.png') // for text
 const matcapTexture4 = textureLoader.load('/textures/matcaps/WaterDropletsMixedBubbled001_Sphere.jpg') // for donuts
 
 // Background 
-const backgroundTexture = textureLoader.load('/textures/galaxy.jpg')
+const backgroundTexture = textureLoader.load('/textures/galaxy.jpg') // for background
 scene.background = backgroundTexture
 
 /**
