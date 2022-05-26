@@ -27,44 +27,86 @@ const scene = new THREE.Scene()
  * Textures
  */
 const textureLoader = new THREE.TextureLoader()
-const matcapTexture1 = textureLoader.load('/textures/matcaps/1.png')
-const matcapTexture4 = textureLoader.load('/textures/matcaps/4.png')
+const matcapTexture1 = textureLoader.load('/textures/matcaps/5.png') // for text
+const matcapTexture4 = textureLoader.load('/textures/matcaps/WaterDropletsMixedBubbled001_Sphere.jpg') // for donuts
 
 // Background 
-const backgroundTexture = textureLoader.load('/textures/pillars.jpg')
+const backgroundTexture = textureLoader.load('/textures/galaxy.jpg')
 scene.background = backgroundTexture
 
 /**
  * Fonts
  */
-const text = ['Burgers', 'are just', 'big sandwiches']
-// const textGroup = new THREE.Group()
+const text = ['Donuts', 'are just', 'bagels', 'with sugar']
+//create a group
+const textGroup = new THREE.Group()
+// textGroup.scale.y = 0.3
+scene.add(textGroup)
 
 const fontLoader = new FontLoader()
 fontLoader.load(
     'fonts/helvetiker_regular.typeface.json',
     (font) => {
-        for (let i = 0; i < text.length; i++) {
-            const textGeometry = new TextGeometry(text[i], {
-                font,
-                size: 0.5,
-                height: 0.2,
-                curveSegments: 4,
-                bevelEnabled: true,
-                bevelThickness: 0.03,
-                bevelSize: 0.02,
-                bevelOffset: 0,
-                bevelSegments: 3
-            })
-            textGeometry.center()
-            textGeometry.computeBoundingBox()
-            // textGeometry.translate(
-            //     - (textGeometry.boundingBox.max.y - 0.02) / 2
-            // )
-            const textMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture1})
-            const textObject =new THREE.Mesh(textGeometry, textMaterial)
-            scene.add(textObject)
-        }
+        const textGeometry1 = new TextGeometry(text[0], {
+            font,
+            size: 0.5,
+            height: 0.2,
+            curveSegments: 4,
+            bevelEnabled: true,
+            bevelThickness: 0.03,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 3
+        })
+        const textGeometry2 = new TextGeometry(text[1], {
+            font,
+            size: 0.5,
+            height: 0.2,
+            curveSegments: 4,
+            bevelEnabled: true,
+            bevelThickness: 0.03,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 3
+        })
+        const textGeometry3 = new TextGeometry(text[2], {
+            font,
+            size: 0.5,
+            height: 0.2,
+            curveSegments: 4,
+            bevelEnabled: true,
+            bevelThickness: 0.03,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 3
+        })
+        const textGeometry4 = new TextGeometry(text[3], {
+            font,
+            size: 0.5,
+            height: 0.2,
+            curveSegments: 4,
+            bevelEnabled: true,
+            bevelThickness: 0.03,
+            bevelSize: 0.02,
+            bevelOffset: 0,
+            bevelSegments: 3
+        })
+        textGeometry1.center()
+        textGeometry2.center()
+        textGeometry3.center()
+        textGeometry4.center()
+        
+        const textMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture1})
+        const textObject1 =new THREE.Mesh(textGeometry1, textMaterial)
+        textObject1.position.y = 1.2
+        const textObject2 =new THREE.Mesh(textGeometry2, textMaterial)
+        textObject2.position.y = .6
+        const textObject3 =new THREE.Mesh(textGeometry3, textMaterial)
+        textObject3.position.y = 0
+        const textObject4 =new THREE.Mesh(textGeometry4, textMaterial)
+        textObject4.position.y = -.6
+        textGroup.add(textObject1, textObject2, textObject3, textObject4)
+
         //! Center the textGeometry
         // by default, three.js is using sphere bounding. we are changing it to box bounding. 
         // textGeometry.computeBoundingBox()
@@ -85,6 +127,7 @@ fontLoader.load(
 
 
         //! Creating 100 Donuts
+        // const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 16, 32)
         const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 16, 32)
         const donutMaterial = new THREE.MeshMatcapMaterial({matcap: matcapTexture4})
 
