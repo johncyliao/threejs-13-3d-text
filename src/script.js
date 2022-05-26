@@ -11,6 +11,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
  */
 // Debug
 const gui = new dat.GUI()
+gui.close() //fold the window by default
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
