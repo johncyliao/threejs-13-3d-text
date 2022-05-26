@@ -17,3 +17,12 @@ body
     left: 0;
     outline: none;
 }
+
+h1 {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    z-index: 1;
+    color: rgb(244, 139, 70);
+    font-family: monospace;
+}

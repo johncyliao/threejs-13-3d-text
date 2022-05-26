@@ -10,7 +10,7 @@ import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
  * Base
  */
 // Debug
-// const gui = new dat.GUI()
+const gui = new dat.GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -38,10 +38,12 @@ scene.background = backgroundTexture
  * Fonts
  */
 const text = ['Donuts', 'are just', 'bagels', 'with sugar']
-//create a group
+//create groups
 const textGroup = new THREE.Group()
+const donutGroup = new THREE.Group()
 // textGroup.scale.y = 0.3
 scene.add(textGroup)
+scene.add(donutGroup)
 
 const fontLoader = new FontLoader()
 fontLoader.load(
@@ -106,6 +108,8 @@ fontLoader.load(
         const textObject4 =new THREE.Mesh(textGeometry4, textMaterial)
         textObject4.position.y = -.6
         textGroup.add(textObject1, textObject2, textObject3, textObject4)
+        gui.add(textGroup.scale, 'y').min(0).max(3).step(0.1).name('text scale y')
+        gui.add(textGroup.scale, 'x').min(0).max(3).step(0.1).name('text scale x')
 
         //! Center the textGeometry
         // by default, three.js is using sphere bounding. we are changing it to box bounding. 
@@ -145,8 +149,13 @@ fontLoader.load(
             const scale = Math.random()
             donut.scale.set(scale, scale, scale)
 
-            scene.add(donut)
+            donutGroup.add(donut)
+            
         }
+        gui.add(donutGroup.scale, 'x').min(0).max(3).step(0.1).name('donut scale x')
+        gui.add(donutGroup.scale, 'y').min(0).max(3).step(0.1).name('donut scale y')
+        // gui.add(donutGroup.rotation, 'x').min(0).max(3).step(0.1).name('donut scale y')
+        
 
     }
 )
@@ -225,6 +234,12 @@ window.addEventListener('mousemove', (e) => {
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    //! donutGroup rotation
+    donutGroup.rotation.y += 0.0006
+    donutGroup.rotation.x -= 0.0004
+    donutGroup.rotation.z += 0.0004
+
 
     // Update controls
     controls.update()
